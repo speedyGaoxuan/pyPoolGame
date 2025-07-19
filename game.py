@@ -1,11 +1,6 @@
-from ast import Constant
 import pygame
 from math import *
 import random
-
-# @Constant
-# def cueball():
-#     return balls[0]
 
 class Button:
     def __init__(self, x, y, width, height, text, color, hover_color, text_color, font_size=30):
@@ -53,9 +48,12 @@ class PoolTable:
         pygame.draw.rect(surface,self.frame,self.frame_rect,self.framewidth,border_radius=20)
 
 
-friction=0.98
-wall_friction=0.75 
+
+
+friction=0.985
+wall_friction=0.6
 restitution = 1.1  # 弹性系数
+crash_friction=0.5
 
 min_v=0
 max_v=3600
@@ -74,7 +72,7 @@ class Ball:
         self.num=num
         self.type=type
         self.active=True
-        self.mass=ball_radius ** 2
+        self.mass=1000
 
     def draw(self,surface):
         if self.type:
@@ -265,7 +263,7 @@ while running:
     mouse_y=mouse_pos[1]-table_gap_y
     
 
-    print(hit_available)
+    #print(hit_available)
 
     for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -285,7 +283,7 @@ while running:
 
     elif global_status=="game":
 
-        print(balls[0].vx,balls[0].vy)
+        #print(balls[0].vx,balls[0].vy)
 
         window.fill((0,0,128))
         table.draw(window)
